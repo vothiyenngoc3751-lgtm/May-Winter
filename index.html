@@ -134,11 +134,7 @@
         }
 
         @media (min-width: 900px) {
-            .nav-links {
-                display: flex;
-                flex: 1;
-                min-width: 0;
-            }
+            .nav-links { display: flex; flex: 1; min-width: 0; }
         }
 
         .nav-links a {
@@ -152,449 +148,185 @@
             display: block;
         }
 
-        .nav-links a:hover {
-            color: var(--accent);
-            background: var(--bg-secondary);
-        }
+        .nav-links a:hover { color: var(--accent); background: var(--bg-secondary); }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
+        .header-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 
         .music-player {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 0.3rem 0.5rem 0.3rem 0.3rem;
+            display: flex; align-items: center; gap: 0.4rem;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 50px; padding: 0.3rem 0.5rem 0.3rem 0.3rem;
         }
 
         .music-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
+            background: var(--accent); color: white; border: none;
+            width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
         }
 
         .volume-slider {
-            width: 50px; height: 3px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: var(--border);
-            border-radius: 2px;
-            outline: none;
+            width: 50px; height: 3px; -webkit-appearance: none; appearance: none;
+            background: var(--border); border-radius: 2px; outline: none;
         }
 
         .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px; height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            cursor: pointer;
+            -webkit-appearance: none; width: 12px; height: 12px;
+            background: var(--accent); border-radius: 50%; cursor: pointer;
         }
 
         .icon-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
+            background: var(--bg-secondary); border: 1px solid var(--border);
+            color: var(--text-primary); width: 34px; height: 34px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
         }
-      .hero {
-            text-align: center;
-            padding: 3rem 1rem 1.5rem;
-        }
+        .hero { text-align: center; padding: 3rem 1rem 1.5rem; }
 
         .hero h1 {
-            font-family: var(--font-main);
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
+            font-family: var(--font-main); font-size: 2.2rem; font-weight: 700; margin-bottom: 0.8rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
 
-        .hero p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .hero p { color: var(--text-secondary); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
 
         .marquee-container {
-            background: var(--marquee-bg);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 0.6rem 0;
-            overflow: hidden;
-            white-space: nowrap;
-            margin-bottom: 1.5rem;
+            background: var(--marquee-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            padding: 0.6rem 0; overflow: hidden; white-space: nowrap; margin-bottom: 1.5rem;
         }
 
         .marquee-content {
-            display: inline-block;
-            animation: marquee 25s linear infinite;
-            color: var(--marquee-text);
-            font-family: var(--font-main);
-            font-weight: 600;
-            font-size: 0.85rem;
+            display: inline-block; animation: marquee 25s linear infinite;
+            color: var(--marquee-text); font-family: var(--font-main); font-weight: 600; font-size: 0.85rem;
         }
 
         .marquee-content span { margin: 0 1.5rem; }
 
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .controls-section {
-            max-width: 1200px;
-            margin: 0 auto 1.5rem;
-            padding: 0 1rem;
-        }
+        .controls-section { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 1rem; }
 
-        .search-box {
-            position: relative;
-            margin-bottom: 1rem;
-        }
+        .search-box { position: relative; margin-bottom: 1rem; }
 
         .search-box input {
-            width: 100%;
-            padding: 0.9rem 1rem 0.9rem 2.8rem;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            background: var(--card-bg);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            outline: none;
+            width: 100%; padding: 0.9rem 1rem 0.9rem 2.8rem; border: 2px solid var(--border);
+            border-radius: 50px; background: var(--card-bg); color: var(--text-primary);
+            font-family: var(--font-body); font-size: 0.95rem; outline: none;
         }
 
         .search-box input:focus { border-color: var(--accent); }
 
         .search-box::before {
-            content: '🔍';
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.5;
+            content: '🔍'; position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;
         }
 
         .filter-row {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            padding-bottom: 0.3rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) transparent;
+            display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;
+            overflow-x: auto; overflow-y: hidden; padding-bottom: 0.3rem;
+            scrollbar-width: thin; scrollbar-color: var(--accent) transparent;
         }
 
         .filter-row::-webkit-scrollbar { height: 3px; }
-        .filter-row::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
+        .filter-row::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        .filter-label {
-            font-weight: 700;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
+        .filter-label { font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; flex-shrink: 0; white-space: nowrap; }
 
         .filter-btn {
-            padding: 0.45rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            background: var(--card-bg);
-            color: var(--text-secondary);
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
+            padding: 0.45rem 1rem; border: 1px solid var(--border); border-radius: 50px;
+            background: var(--card-bg); color: var(--text-secondary); font-family: var(--font-body);
+            font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+            flex-shrink: 0; transition: all 0.2s ease;
         }
 
-        .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .filter-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
 
         .content-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem 3rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+            max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem;
+            display: grid; grid-template-columns: 1fr; gap: 1.5rem;
         }
 
-        @media (min-width: 640px) {
-            .content-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-            .content-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+        @media (min-width: 640px) { .content-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .content-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: visible;
-            border: 1px solid var(--border);
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-            animation: cardReveal 0.5s ease forwards;
+            background: var(--card-bg); border-radius: 20px; overflow: visible;
+            border: 1px solid var(--border); box-shadow: var(--card-shadow);
+            display: flex; flex-direction: column; animation: cardReveal 0.5s ease forwards;
         }
 
-        @keyframes cardReveal {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes cardReveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .card-image-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 60%;
-            overflow: hidden;
-            background: var(--bg-secondary);
-            border-radius: 20px 20px 0 0;
+            position: relative; width: 100%; padding-top: 60%; overflow: hidden;
+            background: var(--bg-secondary); border-radius: 20px 20px 0 0;
         }
 
-        .card-image {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
+        .card-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
         .card-type-badge {
-            position: absolute;
-            top: 0.8rem; left: 0.8rem;
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--text-primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: absolute; top: 0.8rem; left: 0.8rem; background: rgba(255,255,255,0.95);
+            color: var(--text-primary); padding: 0.3rem 0.8rem; border-radius: 50px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        [data-theme="dark"] .card-type-badge {
-            background: rgba(45, 39, 61, 0.95);
-        }
+        [data-theme="dark"] .card-type-badge { background: rgba(45,39,61,0.95); }
 
-        .card-body {
-            padding: 1.2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+        .card-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
 
-        .card-title {
-            font-family: var(--font-main);
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
+        .card-title { font-family: var(--font-main); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; }
 
-        .card-genres {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
-        }
+        .card-genres { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 
         .genre-tag {
-            background: linear-gradient(135deg, var(--accent), var(--success));
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            box-shadow: 0 2px 6px rgba(212, 165, 165, 0.3);
-            white-space: nowrap;
+            background: linear-gradient(135deg, var(--accent), var(--success)); color: white;
+            padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+            box-shadow: 0 2px 6px rgba(212,165,165,0.3); white-space: nowrap;
         }
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            margin-bottom: 0.5rem;
-        }
+        .btn-group { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0.5rem; }
 
         .btn {
-            width: 100%;
-            padding: 0.7rem;
-            border: none;
-            border-radius: 12px;
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
+            width: 100%; padding: 0.7rem; border: none; border-radius: 12px; font-family: var(--font-main);
+            font-weight: 700; font-size: 0.9rem; cursor: pointer; text-align: center;
+            text-decoration: none; display: block; transition: all 0.3s ease;
         }
 
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212,165,165,0.4); }
 
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(212, 165, 165, 0.4);
-        }
+        .btn-lore { background: linear-gradient(135deg, var(--success), #a8d8ea); color: white; }
+        .btn-lore:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(136,179,200,0.4); }
 
-        .btn-lore {
-            background: linear-gradient(135deg, var(--success), #a8d8ea);
-            color: white;
-        }
+        .comment-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
 
-        .btn-lore:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(136, 179, 200, 0.4);
-        }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 0.8rem; }
+        .comment-title { font-weight: 700; font-size: 0.9rem; }
+        .comment-toggle { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
 
-        .comment-section {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 0.8rem;
-        }
-
-        .comment-title {
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        .comment-toggle {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .comment-list-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
+        .comment-list-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .comment-list-wrapper.expanded { max-height: 2000px; }
 
-        .comment-item {
-            background: var(--bg-secondary);
-            padding: 0.8rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--accent);
-            margin-bottom: 0.6rem;
-        }
+        .comment-item { background: var(--bg-secondary); padding: 0.8rem; border-radius: 10px; border-left: 3px solid var(--accent); margin-bottom: 0.6rem; }
+        .comment-author { font-weight: 700; font-size: 0.85rem; color: var(--accent); }
+        .comment-text { font-size: 0.85rem; margin-top: 0.2rem; }
 
-        .comment-author {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        .comment-text {
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
-        }
-
-        .comment-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-        }
+        .comment-form { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
 
         .comment-input {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            resize: vertical;
-            min-height: 60px;
+            width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 8px;
+            background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body);
+            font-size: 0.85rem; resize: vertical; min-height: 60px;
         }
 
         .comment-name-input { min-height: auto; }
+        .btn-comment { align-self: flex-end; padding: 0.5rem 1.2rem; font-size: 0.85rem; }
 
-        .btn-comment {
-            align-self: flex-end;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.85rem;
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-secondary);
-        }
-
-        .empty-state-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            font-family: var(--font-main);
-            font-size: 1.3rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-primary);
-        }
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--text-secondary); }
+        .empty-state-icon { font-size: 2.5rem; margin-bottom: 0.8rem; opacity: 0.5; }
+        .empty-state h3 { font-family: var(--font-main); font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--text-primary); }
     </style>
 </head>
 <body>
-
     <div class="bokeh-bg"></div>
 
     <header>
@@ -638,14 +370,12 @@
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên, thể loại..." oninput="handleSearch()">
         </div>
-        
         <div class="filter-row" id="typeFilters">
             <span class="filter-label">TYPE:</span>
             <button class="filter-btn active" onclick="setFilter('type', 'all', this)">All</button>
             <button class="filter-btn" onclick="setFilter('type', 'Character', this)">Character</button>
             <button class="filter-btn" onclick="setFilter('type', 'Open World', this)">Open World</button>
         </div>
-
         <div class="filter-row" id="genreFilters">
             <span class="filter-label">GENRE:</span>
             <button class="filter-btn active" onclick="setFilter('genre', 'all', this)">All</button>
@@ -660,39 +390,26 @@
 
     <script>
         /* ========================================
-           CONTENT DATA
-           THÊM CHARACTER / OPEN WORLD TẠI ĐÂY
-           
-           CẤU TRÚC MỚI (có thêm lore):
-           {
-               name: "Tên",
-               type: "Character" hoặc "Open World",
-               genre: ["Thể loại 1", "Thể loại 2"],
-               image: "URL_ẢNH",
-               link: "URL_GOOGLE_AI_STUDIO",
-               lore: "URL_LORE"  // ← THÊM DÒNG NÀY NẾU CÓ LORE
-           }
-           
-           Nếu không có lore, bỏ qua trường lore hoặc để lore: ""
+           CONTENT DATA - THÊM CHARACTER / OPEN WORLD TẠI ĐÂY
            ======================================== */
         const contents = [
-    {
-        name: "Quỷ / Pháp Sư / Pháp Khí",
-        type: "Open World",
-        genre: ["Open World", "BG", "BL", "GL", "R18", "Fantasy", "Horror", "Supernatural"],
-        image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/aul-1937/refs/heads/main/FB_IMG_1788858710788.jpg",
-        link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rPSB8hl3vb0RtmfVz4Fhe-8X5MDsH_IX%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-        lore: ""
-    },
-    {
-        name: "Super Hero America",
-        type: "Open World",
-        genre: ["Open World", "Fantasy", "R18", "BG", "BL", "GL", "Superhero"],
-        image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/May-Winter/refs/heads/main/FB_IMG_1788907677780.jpg",
-        link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221uEJROc8CRpsnLWuAQQzTHYhYJK9Y3CnW%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-        lore: "https://vothiyenngoc3751-lgtm.github.io/SuperHero/"
-    }
-];
+            {
+                name: "Quỷ / Pháp Sư / Pháp Khí",
+                type: "Open World",
+                genre: ["Open World", "BG", "BL", "GL", "R18", "Fantasy", "Horror", "Supernatural"],
+                image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/aul-1937/refs/heads/main/FB_IMG_1788858710788.jpg",
+                link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rPSB8hl3vb0RtmfVz4Fhe-8X5MDsH_IX%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+                lore: ""
+            },
+            {
+                name: "Super Hero America",
+                type: "Open World",
+                genre: ["Open World", "Fantasy", "R18", "BG", "BL", "GL", "Superhero"],
+                image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/May-Winter/refs/heads/main/FB_IMG_1788907677780.jpg",
+                link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221uEJROc8CRpsnLWuAQQzTHYhYJK9Y3CnW%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+                lore: "https://vothiyenngoc3751-lgtm.github.io/SuperHero/"
+            }
+        ];
 
         let currentFilters = { type: 'all', genre: 'all', search: '' };
 
@@ -712,16 +429,12 @@
         function renderGenreFilters() {
             const container = document.getElementById('genreFilters');
             if (!container) return;
-            
             const genres = getUniqueGenres();
-            
             let html = '<span class="filter-label">GENRE:</span>';
             html += '<button class="filter-btn active" onclick="setFilter(\'genre\', \'all\', this)">All</button>';
-            
             genres.forEach(genre => {
                 html += `<button class="filter-btn" onclick="setFilter('genre', '${genre}', this)">${genre}</button>`;
             });
-            
             container.innerHTML = html;
         }
 
@@ -733,8 +446,7 @@
                 return 'item-' + Math.random().toString(36).substring(2, 10);
             }
         }
-
-        function renderContents() {
+       function renderContents() {
             const grid = document.getElementById('contentGrid');
             
             const filtered = contents.filter(item => {
@@ -745,7 +457,6 @@
                     item.name.toLowerCase().includes(searchLower) ||
                     item.type.toLowerCase().includes(searchLower) ||
                     (item.genre && item.genre.some(g => g.toLowerCase().includes(searchLower)));
-                
                 return matchType && matchGenre && matchSearch;
             });
 
@@ -762,7 +473,7 @@
             grid.innerHTML = filtered.map((item, index) => {
                 const itemId = generateId(item);
                 const genresHtml = item.genre ? item.genre.map(g => `<span class="genre-tag">${g}</span>`).join('') : '';
-              // Tạo nút Lore - chỉ hiện nếu có link lore
+                
                 let loreButton = '';
                 if (item.lore && item.lore.trim() !== '') {
                     loreButton = `<a href="${item.lore}" target="_blank" rel="noopener noreferrer" class="btn btn-lore">📖 View Lore</a>`;
@@ -777,12 +488,10 @@
                         <div class="card-body">
                             <h3 class="card-title">${item.name}</h3>
                             <div class="card-genres">${genresHtml}</div>
-                            
                             <div class="btn-group">
                                 <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">✦ Open in Google AI Studio</a>
                                 ${loreButton}
                             </div>
-                            
                             <div class="comment-section">
                                 <div class="comment-header" onclick="toggleComments('${itemId}')">
                                     <span class="comment-title">💬 Comments <span id="count-${itemId}">(0)</span></span>
@@ -803,9 +512,8 @@
             }).join('');
 
             filtered.forEach(item => renderComments(generateId(item)));
-        }
-
-        function loadCommentData() {
+       }
+      function loadCommentData() {
             try {
                 const data = localStorage.getItem('maywinter_comments');
                 return data ? JSON.parse(data) : {};
@@ -813,16 +521,14 @@
         }
 
         function saveCommentData(data) {
-            try {
-                localStorage.setItem('maywinter_comments', JSON.stringify(data));
-            } catch(e) { console.error('Không thể lưu comment:', e); }
+            try { localStorage.setItem('maywinter_comments', JSON.stringify(data)); }
+            catch(e) { console.error('Không thể lưu comment:', e); }
         }
 
         function toggleComments(itemId) {
             const wrapper = document.getElementById(`wrapper-${itemId}`);
             const toggle = document.getElementById(`toggle-${itemId}`);
             if (!wrapper || !toggle) return;
-            
             if (wrapper.classList.contains('expanded')) {
                 wrapper.classList.remove('expanded');
                 toggle.textContent = 'Xem thêm ↓';
@@ -835,27 +541,22 @@
         function renderComments(itemId) {
             const allComments = loadCommentData();
             const comments = allComments[itemId] || [];
-            
             const countEl = document.getElementById(`count-${itemId}`);
             if (countEl) countEl.textContent = `(${comments.length})`;
-            
             const listEl = document.getElementById(`list-${itemId}`);
             if (!listEl) return;
-
             if (comments.length === 0) {
-                listEl.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.85rem; font-style: italic; padding: 0.5rem 0;">Chưa có bình luận nào.</p>';
+                listEl.innerHTML = '<p style="color:var(--text-secondary);font-size:0.85rem;font-style:italic;padding:0.5rem 0;">Chưa có bình luận nào.</p>';
                 return;
             }
-
             const displayComments = comments.slice(0, 3);
             const hasMore = comments.length > 3;
-            
             listEl.innerHTML = displayComments.map(c => `
                 <div class="comment-item">
                     <div class="comment-author">${escapeHtml(c.name)}</div>
                     <div class="comment-text">${escapeHtml(c.text)}</div>
                 </div>
-            `).join('') + (hasMore ? `<p style="text-align: center; color: var(--accent); font-size: 0.8rem; cursor: pointer; padding: 0.3rem;" onclick="toggleComments('${itemId}')">...và ${comments.length - 3} bình luận khác</p>` : '');
+            `).join('') + (hasMore ? `<p style="text-align:center;color:var(--accent);font-size:0.8rem;cursor:pointer;padding:0.3rem;" onclick="toggleComments('${itemId}')">...và ${comments.length - 3} bình luận khác</p>` : '');
         }
 
         function submitComment(event, itemId) {
@@ -865,15 +566,12 @@
             const name = nameInput.value.trim();
             const text = textInput.value.trim();
             if (!name || !text) return;
-
             const allComments = loadCommentData();
             if (!allComments[itemId]) allComments[itemId] = [];
-            
             allComments[itemId].push({ name, text, date: new Date().toISOString() });
             saveCommentData(allComments);
             textInput.value = '';
             renderComments(itemId);
-            
             const wrapper = document.getElementById(`wrapper-${itemId}`);
             if (allComments[itemId].length === 4 && wrapper && !wrapper.classList.contains('expanded')) {
                 toggleComments(itemId);
@@ -885,7 +583,8 @@
             div.textContent = text;
             return div.innerHTML;
         }
-      function handleSearch() {
+
+        function handleSearch() {
             currentFilters.search = document.getElementById('searchInput').value;
             renderContents();
         }
@@ -918,22 +617,14 @@
         let isPlaying = false;
 
         function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                playPauseBtn.textContent = '▶';
-            } else {
-                bgMusic.play().catch(e => console.log("Autoplay blocked"));
-                playPauseBtn.textContent = '⏸';
-            }
+            if (isPlaying) { bgMusic.pause(); playPauseBtn.textContent = '▶'; }
+            else { bgMusic.play().catch(e => console.log("Autoplay blocked")); playPauseBtn.textContent = '⏸'; }
             isPlaying = !isPlaying;
         }
 
-        function setVolume(val) {
-            bgMusic.volume = val;
-        }
-
+        function setVolume(val) { bgMusic.volume = val; }
         bgMusic.volume = 0.5;
-      // ========================================
+        // ========================================
         // KHỞI ĐỘNG WEBSITE
         // ========================================
         document.addEventListener('DOMContentLoaded', () => {
