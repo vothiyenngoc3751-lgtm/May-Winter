@@ -56,6 +56,35 @@
             overflow-x: hidden;
         }
 
+        /* 🔔 POPUP THÔNG BÁO BẬT NHẠC */
+        .music-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 9999;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .music-popup:hover { transform: scale(1.05); }
+        .music-popup.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 24px rgba(212,165,165,0.4); }
+            50% { box-shadow: 0 8px 32px rgba(212,165,165,0.7); }
+        }
+
         .bokeh-bg {
             position: fixed;
             top: 0; left: 0;
@@ -329,6 +358,11 @@
 <body>
     <div class="bokeh-bg"></div>
 
+    <!-- 🔔 POPUP THÔNG BÁO BẬT NHẠC -->
+    <div class="music-popup" id="musicPopup" onclick="enableMusicFromPopup()">
+        🎵 Nhấn để bật nhạc nền
+    </div>
+
     <header>
         <div class="nav-container">
             <a href="#" class="logo">✦ May Winter</a>
@@ -343,7 +377,7 @@
                     <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">▶</button>
                     <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="setVolume(this.value)">
                 </div>
-                <button class="icon-btn" onclick="toggleTheme()" id="themeToggle"></button>
+                <button class="icon-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
             </div>
         </div>
     </header>
@@ -384,13 +418,14 @@
 
     <section class="content-grid" id="contentGrid"></section>
 
-    <audio id="bgMusic" loop autoplay muted>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
+    <!-- 🎵 ĐÃ BỎ muted + ĐỔI SANG LINK STREAM TRỰC TIẾP -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
-
     <script>
         /* ========================================
-           CONTENT DATA - THÊM CHARACTER / OPEN WORLD TẠI ĐÂY
+           CONTENT DATA
            ======================================== */
         const contents = [
             {
@@ -399,7 +434,7 @@
                 genre: ["Open World", "BG", "BL", "GL", "R18", "Fantasy", "Horror", "Supernatural"],
                 image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/aul-1937/refs/heads/main/FB_IMG_1788858710788.jpg",
                 link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rPSB8hl3vb0RtmfVz4Fhe-8X5MDsH_IX%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/?fbclid=Iwb21leAUNe1ljbGNrBQ17CHBkb2YBZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMzUwNjg1NTMxNzI4AAEemEtCA8I9Zi1-hBRD7XUbhtqBz6v8OYVA8guaxHFcPA37Wn64YDullQz1aFE_aem_NtUH4uuOgwx84WEfdkRCdw"
+                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/"
             },
             {
                 name: "Super Hero America",
@@ -410,20 +445,20 @@
                 lore: "https://vothiyenngoc3751-lgtm.github.io/SuperHero/"
             },
             {
-    name: "Lục Hoài Cẩn",
-    type: "Character",
-    genre: ["Romance", "BG", "R18", "Xuyên Không", "Tổng Tài"],
-    image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/Hinhanh/refs/heads/main/FB_IMG_1788917020723.jpg",
-    link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221NTtmkrCPCXgxKXLacGTlV8FsfriO3bZz%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-    lore: ""
-        },
+                name: "Lục Hoài Cẩn",
+                type: "Character",
+                genre: ["Romance", "BG", "R18", "Xuyên Không", "Tổng Tài"],
+                image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/Hinhanh/refs/heads/main/FB_IMG_1788917020723.jpg",
+                link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221NTtmkrCPCXgxKXLacGTlV8FsfriO3bZz%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+                lore: ""
+            },
             {
-    name: "Hệ Thống Chinh Phục Ác Nhân",
-    type: "Open World",
-    genre: ["Open World", "BG", "BL", "GL", "R21", "Xuyên Không", "Công Lược", "Hệ Thống"],
-    image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/Hinhanh/refs/heads/main/grok_1788920090128%20(1).jpg",
-    link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221PjcUajj6QQVY6s5lXhzjaENxxQ-0D-Qu%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-    lore: ""
+                name: "Hệ Thống Chinh Phục Ác Nhân",
+                type: "Open World",
+                genre: ["Open World", "BG", "BL", "GL", "R21", "Xuyên Không", "Công Lược", "Hệ Thống"],
+                image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/Hinhanh/refs/heads/main/grok_1788920090128%20(1).jpg",
+                link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221PjcUajj6QQVY6s5lXhzjaENxxQ-0D-Qu%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
+                lore: ""
             }
         ];
 
@@ -431,12 +466,9 @@
 
         function getUniqueGenres() {
             const genres = new Set();
-            if (!contents || contents.length === 0) return [];
             contents.forEach(item => {
-                if (item && item.genre && Array.isArray(item.genre)) {
-                    item.genre.forEach(g => {
-                        if (g && g.trim()) genres.add(g.trim());
-                    });
+                if (item.genre && Array.isArray(item.genre)) {
+                    item.genre.forEach(g => { if (g && g.trim()) genres.add(g.trim()); });
                 }
             });
             return Array.from(genres).sort();
@@ -458,13 +490,11 @@
             try {
                 const raw = encodeURIComponent(item.name + '|' + item.type);
                 return btoa(raw).replace(/[^a-zA-Z0-9]/g, '').substring(0, 24);
-            } catch(e) {
-                return 'item-' + Math.random().toString(36).substring(2, 10);
-            }
+            } catch(e) { return 'item-' + Math.random().toString(36).substring(2, 10); }
         }
-       function renderContents() {
+
+        function renderContents() {
             const grid = document.getElementById('contentGrid');
-            
             const filtered = contents.filter(item => {
                 const matchType = currentFilters.type === 'all' || item.type === currentFilters.type;
                 const matchGenre = currentFilters.genre === 'all' || (item.genre && item.genre.includes(currentFilters.genre));
@@ -476,11 +506,6 @@
                 return matchType && matchGenre && matchSearch;
             });
 
-            if (contents.length === 0) {
-                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✦</div><h3>Nothing here yet</h3><p>Hãy thêm dữ liệu vào CONTENT DATA.</p></div>`;
-                return;
-            }
-
             if (filtered.length === 0) {
                 grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No results found</h3><p>Thử thay đổi từ khóa hoặc bộ lọc.</p></div>`;
                 return;
@@ -489,12 +514,10 @@
             grid.innerHTML = filtered.map((item, index) => {
                 const itemId = generateId(item);
                 const genresHtml = item.genre ? item.genre.map(g => `<span class="genre-tag">${g}</span>`).join('') : '';
-                
                 let loreButton = '';
                 if (item.lore && item.lore.trim() !== '') {
                     loreButton = `<a href="${item.lore}" target="_blank" rel="noopener noreferrer" class="btn btn-lore">📖 View Lore</a>`;
                 }
-                
                 return `
                     <article class="card" style="animation-delay: ${index * 0.1}s">
                         <div class="card-image-wrapper">
@@ -528,8 +551,9 @@
             }).join('');
 
             filtered.forEach(item => renderComments(generateId(item)));
-       }
-      function loadCommentData() {
+        }
+
+        function loadCommentData() {
             try {
                 const data = localStorage.getItem('maywinter_comments');
                 return data ? JSON.parse(data) : {};
@@ -588,10 +612,6 @@
             saveCommentData(allComments);
             textInput.value = '';
             renderComments(itemId);
-            const wrapper = document.getElementById(`wrapper-${itemId}`);
-            if (allComments[itemId].length === 4 && wrapper && !wrapper.classList.contains('expanded')) {
-                toggleComments(itemId);
-            }
         }
 
         function escapeHtml(text) {
@@ -612,7 +632,9 @@
             btnElement.classList.add('active');
             renderContents();
         }
-
+        /* ========================================
+           THEME
+           ======================================== */
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -628,43 +650,132 @@
             document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         }
 
+        /* ========================================
+           🎵 HỆ THỐNG NHẠC NỀN (ĐÃ SỬA LỖI)
+           ======================================== */
         const bgMusic = document.getElementById('bgMusic');
         const playPauseBtn = document.getElementById('playPauseBtn');
+        const musicPopup = document.getElementById('musicPopup');
         let isPlaying = false;
+        let userInteracted = false;
 
         function toggleMusic() {
-            if (isPlaying) { bgMusic.pause(); playPauseBtn.textContent = '▶'; }
-            else { bgMusic.play().catch(e => console.log("Autoplay blocked")); playPauseBtn.textContent = '⏸'; }
+            if (!userInteracted) {
+                userInteracted = true;
+                hidePopup();
+            }
+            if (isPlaying) {
+                bgMusic.pause();
+                playPauseBtn.textContent = '▶';
+            } else {
+                bgMusic.play()
+                    .then(() => {
+                        playPauseBtn.textContent = '⏸';
+                    })
+                    .catch(e => {
+                        console.log("Bị chặn:", e.message);
+                        showPopup();
+                    });
+            }
             isPlaying = !isPlaying;
         }
 
-        window.addEventListener('load', () => {
-            const autoplayPromise = bgMusic.play();
-            if (autoplayPromise !== undefined) {
-                autoplayPromise.then(() => {
+        function setVolume(val) {
+            bgMusic.volume = val;
+            if (val > 0 && !isPlaying && userInteracted) {
+                bgMusic.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playPauseBtn.textContent = '⏸';
+                        hidePopup();
+                    })
+                    .catch(() => showPopup());
+            }
+        }
+
+        function hidePopup() {
+            if (musicPopup) musicPopup.classList.add('hidden');
+        }
+
+        function showPopup() {
+            if (musicPopup) musicPopup.classList.remove('hidden');
+        }
+
+        // 🎯 Khi người dùng click vào popup → phát nhạc có tiếng
+        function enableMusicFromPopup() {
+            userInteracted = true;
+            bgMusic.volume = 0.5;
+            bgMusic.play()
+                .then(() => {
                     isPlaying = true;
                     playPauseBtn.textContent = '⏸';
+                    hidePopup();
+                })
+                .catch(e => {
+                    console.log("Không phát được:", e.message);
+                });
+        }
+
+        /* ========================================
+           🚀 KHỞI ĐỘNG
+           ======================================== */
+        function tryAutoplay() {
+            // Thử phát im lặng trước (thường được cho phép)
+            bgMusic.volume = 0;
+            const promise = bgMusic.play();
+            if (promise !== undefined) {
+                promise.then(() => {
+                    // Phát được nhưng im → bật popup hỏi người dùng
+                    isPlaying = true;
+                    showPopup();
                 }).catch(() => {
-                    document.addEventListener('click', function autoPlayOnce() {
-                        bgMusic.play().then(() => {
-                            isPlaying = true;
-                            playPauseBtn.textContent = '⏸';
-                        }).catch(() => {});
-                        document.removeEventListener('click', autoPlayOnce);
-                    }, { once: true });
+                    // Trình duyệt chặn hoàn toàn → hiện popup
+                    showPopup();
                 });
             }
-        });
+        }
 
-        function setVolume(val) { bgMusic.volume = val; }
-        bgMusic.volume = 0.5;
-        // ========================================
-        // KHỞI ĐỘNG WEBSITE
-        // ========================================
+        // 🎯 Lắng nghe tương tác đầu tiên của người dùng để tự động bật nhạc
+        function setupFirstInteraction() {
+            const events = ['click', 'touchstart', 'keydown', 'scroll'];
+            const handler = function() {
+                if (!userInteracted) {
+                    userInteracted = true;
+                    // Cố gắng phát nhạc có tiếng sau tương tác
+                    bgMusic.volume = 0.5;
+                    bgMusic.play()
+                        .then(() => {
+                            isPlaying = true;
+                            playPauseBtn.textContent = '⏸';
+                            hidePopup();
+                        })
+                        .catch(() => {
+                            // Nếu vẫn không được, thử phát im trước rồi popup
+                            bgMusic.volume = 0;
+                            bgMusic.play()
+                                .then(() => {
+                                    isPlaying = true;
+                                    showPopup();
+                                })
+                                .catch(() => {});
+                        });
+                }
+                events.forEach(evt => document.removeEventListener(evt, handler));
+            };
+            events.forEach(evt => document.addEventListener(evt, handler, { once: true }));
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
             renderGenreFilters();
             renderContents();
+            
+            // Thiết lập âm lượng ban đầu
+            bgMusic.volume = 0.5;
+            
+            // Khởi động hệ thống phát nhạc
+            tryAutoplay();
+            setupFirstInteraction();
         });
     </script>
 </body>
