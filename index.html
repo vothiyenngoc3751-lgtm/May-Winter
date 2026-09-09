@@ -182,6 +182,7 @@
             color: var(--text-primary); width: 34px; height: 34px; border-radius: 50%;
             cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
         }
+
         .hero { text-align: center; padding: 3rem 1rem 1.5rem; }
 
         .hero h1 {
@@ -343,9 +344,7 @@
             </ul>
             <div class="header-right">
                 <div class="music-player">
-                    <!-- Nút Play/Pause -->
                     <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">▶</button>
-                    <!-- Thanh trượt âm lượng -->
                     <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="setVolume(this.value)">
                 </div>
                 <button class="icon-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
@@ -389,11 +388,9 @@
 
     <section class="content-grid" id="contentGrid"></section>
 
-    <!--  NHẠC MỚI: Link trực tiếp, KHÔNG autoplay, KHÔNG muted -->
+    <!-- 🎵 AUDIO PLAYER: Sử dụng link Google Drive của bạn -->
     <audio id="bgMusic" loop preload="auto">
-        <!-- Link nhạc Marimba vui tươi bạn cung cấp -->
-        <source src="https://drive.google.com/file/d/14UcrZGEryo0kn7VfPmdmIwjX5-7yyujB/view?usp=drivesdk" type="audio/mpeg">
-        Trình duyệt của bạn không hỗ trợ thẻ audio.
+        <source src="https://drive.google.com/uc?export=download&id=14UcrZGEryo0kn7VfPmdmIwjX5-7yyujB" type="audio/mpeg">
     </audio>
     <script>
         /* ========================================
@@ -406,7 +403,7 @@
                 genre: ["Open World", "BG", "BL", "GL", "R18", "Fantasy", "Horror", "Supernatural"],
                 image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/aul-1937/refs/heads/main/FB_IMG_1788858710788.jpg",
                 link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rPSB8hl3vb0RtmfVz4Fhe-8X5MDsH_IX%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/"
+                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/?fbclid=Iwb21leAUNe1ljbGNrBQ17CHBkb2YBZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMzUwNjg1NTMxNzI4AAEemEtCA8I9Zi1-hBRD7XUbhtqBz6v8OYVA8guaxHFcPA37Wn64YDullQz1aFE_aem_NtUH4uuOgwx84WEfdkRCdw"
             },
             {
                 name: "Super Hero America",
@@ -438,9 +435,12 @@
 
         function getUniqueGenres() {
             const genres = new Set();
+            if (!contents || contents.length === 0) return [];
             contents.forEach(item => {
-                if (item.genre && Array.isArray(item.genre)) {
-                    item.genre.forEach(g => { if (g && g.trim()) genres.add(g.trim()); });
+                if (item && item.genre && Array.isArray(item.genre)) {
+                    item.genre.forEach(g => {
+                        if (g && g.trim()) genres.add(g.trim());
+                    });
                 }
             });
             return Array.from(genres).sort();
@@ -462,11 +462,14 @@
             try {
                 const raw = encodeURIComponent(item.name + '|' + item.type);
                 return btoa(raw).replace(/[^a-zA-Z0-9]/g, '').substring(0, 24);
-            } catch(e) { return 'item-' + Math.random().toString(36).substring(2, 10); }
+            } catch(e) {
+                return 'item-' + Math.random().toString(36).substring(2, 10);
+            }
         }
 
         function renderContents() {
             const grid = document.getElementById('contentGrid');
+            
             const filtered = contents.filter(item => {
                 const matchType = currentFilters.type === 'all' || item.type === currentFilters.type;
                 const matchGenre = currentFilters.genre === 'all' || (item.genre && item.genre.includes(currentFilters.genre));
@@ -478,18 +481,25 @@
                 return matchType && matchGenre && matchSearch;
             });
 
+            if (contents.length === 0) {
+                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✦</div><h3>Nothing here yet</h3><p>Hãy thêm dữ liệu vào CONTENT DATA.</p></div>`;
+                return;
+            }
+
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon"></div><h3>No results found</h3><p>Thử thay đổi từ khóa hoặc bộ lọc.</p></div>`;
+                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No results found</h3><p>Thử thay đổi từ khóa hoặc bộ lọc.</p></div>`;
                 return;
             }
 
             grid.innerHTML = filtered.map((item, index) => {
                 const itemId = generateId(item);
                 const genresHtml = item.genre ? item.genre.map(g => `<span class="genre-tag">${g}</span>`).join('') : '';
+                
                 let loreButton = '';
                 if (item.lore && item.lore.trim() !== '') {
                     loreButton = `<a href="${item.lore}" target="_blank" rel="noopener noreferrer" class="btn btn-lore">📖 View Lore</a>`;
                 }
+                
                 return `
                     <article class="card" style="animation-delay: ${index * 0.1}s">
                         <div class="card-image-wrapper">
@@ -584,6 +594,10 @@
             saveCommentData(allComments);
             textInput.value = '';
             renderComments(itemId);
+            const wrapper = document.getElementById(`wrapper-${itemId}`);
+            if (allComments[itemId].length === 4 && wrapper && !wrapper.classList.contains('expanded')) {
+                toggleComments(itemId);
+            }
         }
 
         function escapeHtml(text) {
@@ -605,7 +619,7 @@
             renderContents();
         }
         /* ========================================
-           THEME
+           THEME & NHẠC NỀN
            ======================================== */
         function toggleTheme() {
             const html = document.documentElement;
@@ -619,52 +633,65 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('maywinter_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '';
+            document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         }
 
-        /* ========================================
-           🎵 HỆ THỐNG NHẠC ĐƠN GIẢN (CHỈ BẤM MỚI CHẠY)
-           ======================================== */
         const bgMusic = document.getElementById('bgMusic');
         const playPauseBtn = document.getElementById('playPauseBtn');
         let isPlaying = false;
+        let userInteracted = false;
 
-        // Đặt âm lượng mặc định
         bgMusic.volume = 0.5;
 
         function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                playPauseBtn.textContent = '▶'; // Icon Play
+            userInteracted = true;
+            if (isPlaying) { 
+                bgMusic.pause(); 
+                playPauseBtn.textContent = '▶'; 
                 playPauseBtn.style.background = 'var(--accent)';
-            } else {
+            } else { 
                 bgMusic.play()
                     .then(() => {
-                        playPauseBtn.textContent = '⏸'; // Icon Pause
+                        playPauseBtn.textContent = '⏸';
                         playPauseBtn.style.background = 'var(--accent-hover)';
                     })
-                    .catch(e => {
-                        console.log("Lỗi phát nhạc:", e);
-                        alert("Vui lòng tương tác với trang để bật nhạc!");
-                    });
+                    .catch(e => { 
+                        console.log("Trình duyệt chặn phát nhạc hoặc link lỗi:", e); 
+                    }); 
             }
             isPlaying = !isPlaying;
         }
 
-        function setVolume(val) {
-            bgMusic.volume = val;
+        function setVolume(val) { 
+            bgMusic.volume = val; 
+            if (!isPlaying && userInteracted && val > 0) {
+                bgMusic.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playPauseBtn.textContent = '⏸';
+                        playPauseBtn.style.background = 'var(--accent-hover)';
+                    })
+                    .catch(() => {});
+            }
+        }
+
+        function setupAudioUnlock() {
+            const events = ['click', 'touchstart', 'keydown'];
+            const unlockAudio = function() {
+                if (!userInteracted) userInteracted = true;
+                events.forEach(evt => document.removeEventListener(evt, unlockAudio));
+            };
+            events.forEach(evt => document.addEventListener(evt, unlockAudio, { once: true }));
         }
 
         /* ========================================
-           🚀 KHỞI ĐỘNG
+           KHỞI ĐỘNG WEBSITE
            ======================================== */
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
             renderGenreFilters();
             renderContents();
-            
-            // KHÔNG gọi tryAutoplay nữa. Nhạc sẽ im lặng chờ user bấm nút.
-            console.log("Hệ thống đã sẵn sàng. User cần bấm nút Play để nghe nhạc.");
+            setupAudioUnlock();
         });
     </script>
 </body>
