@@ -164,7 +164,7 @@
             display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
             transition: transform 0.2s;
         }
-        
+
         .music-btn:hover { transform: scale(1.1); }
 
         .volume-slider {
@@ -188,7 +188,8 @@
         .hero h1 {
             font-family: var(--font-main); font-size: 2.2rem; font-weight: 700; margin-bottom: 0.8rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
         }
 
         .hero p { color: var(--text-secondary); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
@@ -388,9 +389,9 @@
 
     <section class="content-grid" id="contentGrid"></section>
 
-    <!-- 🎵 AUDIO PLAYER: Sử dụng link Google Drive của bạn -->
+    <!-- 🎵 NHẠC NỀN: Soft Piano nhẹ nhàng (link ổn định, không cần Drive) -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://drive.google.com/uc?export=download&id=14UcrZGEryo0kn7VfPmdmIwjX5-7yyujB" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
     </audio>
     <script>
         /* ========================================
@@ -403,7 +404,7 @@
                 genre: ["Open World", "BG", "BL", "GL", "R18", "Fantasy", "Horror", "Supernatural"],
                 image: "https://raw.githubusercontent.com/vothiyenngoc3751-lgtm/aul-1937/refs/heads/main/FB_IMG_1788858710788.jpg",
                 link: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rPSB8hl3vb0RtmfVz4Fhe-8X5MDsH_IX%22%5D,%22action%22:%22open%22,%22userId%22:%22110823376423660857803%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
-                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/?fbclid=Iwb21leAUNe1ljbGNrBQ17CHBkb2YBZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMzUwNjg1NTMxNzI4AAEemEtCA8I9Zi1-hBRD7XUbhtqBz6v8OYVA8guaxHFcPA37Wn64YDullQz1aFE_aem_NtUH4uuOgwx84WEfdkRCdw"
+                lore: "https://vothiyenngoc3751-lgtm.github.io/Qu--Nh-tb-n/"
             },
             {
                 name: "Super Hero America",
@@ -619,7 +620,7 @@
             renderContents();
         }
         /* ========================================
-           THEME & NHẠC NỀN
+           THEME
            ======================================== */
         function toggleTheme() {
             const html = document.documentElement;
@@ -636,6 +637,9 @@
             document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         }
 
+        /* ========================================
+           🎵 NHẠC NỀN (user bấm nút mới phát)
+           ======================================== */
         const bgMusic = document.getElementById('bgMusic');
         const playPauseBtn = document.getElementById('playPauseBtn');
         let isPlaying = false;
@@ -656,7 +660,7 @@
                         playPauseBtn.style.background = 'var(--accent-hover)';
                     })
                     .catch(e => { 
-                        console.log("Trình duyệt chặn phát nhạc hoặc link lỗi:", e); 
+                        console.log("Trình duyệt chặn phát nhạc:", e); 
                     }); 
             }
             isPlaying = !isPlaying;
