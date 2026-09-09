@@ -56,35 +56,6 @@
             overflow-x: hidden;
         }
 
-        /* 🔔 POPUP THÔNG BÁO BẬT NHẠC */
-        .music-popup {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--accent), var(--success));
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 9999;
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            animation: pulse 2s infinite;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .music-popup:hover { transform: scale(1.05); }
-        .music-popup.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 24px rgba(212,165,165,0.4); }
-            50% { box-shadow: 0 8px 32px rgba(212,165,165,0.7); }
-        }
-
         .bokeh-bg {
             position: fixed;
             top: 0; left: 0;
@@ -191,7 +162,10 @@
             background: var(--accent); color: white; border: none;
             width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
             display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
+            transition: transform 0.2s;
         }
+        
+        .music-btn:hover { transform: scale(1.1); }
 
         .volume-slider {
             width: 50px; height: 3px; -webkit-appearance: none; appearance: none;
@@ -358,11 +332,6 @@
 <body>
     <div class="bokeh-bg"></div>
 
-    <!-- 🔔 POPUP THÔNG BÁO BẬT NHẠC -->
-    <div class="music-popup" id="musicPopup" onclick="enableMusicFromPopup()">
-        🎵 Nhấn để bật nhạc nền
-    </div>
-
     <header>
         <div class="nav-container">
             <a href="#" class="logo">✦ May Winter</a>
@@ -374,7 +343,9 @@
             </ul>
             <div class="header-right">
                 <div class="music-player">
+                    <!-- Nút Play/Pause -->
                     <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">▶</button>
+                    <!-- Thanh trượt âm lượng -->
                     <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="setVolume(this.value)">
                 </div>
                 <button class="icon-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
@@ -418,10 +389,11 @@
 
     <section class="content-grid" id="contentGrid"></section>
 
-    <!-- 🎵 ĐÃ BỎ muted + ĐỔI SANG LINK STREAM TRỰC TIẾP -->
+    <!--  NHẠC MỚI: Link trực tiếp, KHÔNG autoplay, KHÔNG muted -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" type="audio/mpeg">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+        <!-- Link nhạc Marimba vui tươi bạn cung cấp -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3?filename=marimba-loop-120-bpm-104785.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ thẻ audio.
     </audio>
     <script>
         /* ========================================
@@ -507,7 +479,7 @@
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No results found</h3><p>Thử thay đổi từ khóa hoặc bộ lọc.</p></div>`;
+                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon"></div><h3>No results found</h3><p>Thử thay đổi từ khóa hoặc bộ lọc.</p></div>`;
                 return;
             }
 
@@ -647,34 +619,33 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('maywinter_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '☀️' : '';
         }
 
         /* ========================================
-           🎵 HỆ THỐNG NHẠC NỀN (ĐÃ SỬA LỖI)
+           🎵 HỆ THỐNG NHẠC ĐƠN GIẢN (CHỈ BẤM MỚI CHẠY)
            ======================================== */
         const bgMusic = document.getElementById('bgMusic');
         const playPauseBtn = document.getElementById('playPauseBtn');
-        const musicPopup = document.getElementById('musicPopup');
         let isPlaying = false;
-        let userInteracted = false;
+
+        // Đặt âm lượng mặc định
+        bgMusic.volume = 0.5;
 
         function toggleMusic() {
-            if (!userInteracted) {
-                userInteracted = true;
-                hidePopup();
-            }
             if (isPlaying) {
                 bgMusic.pause();
-                playPauseBtn.textContent = '▶';
+                playPauseBtn.textContent = '▶'; // Icon Play
+                playPauseBtn.style.background = 'var(--accent)';
             } else {
                 bgMusic.play()
                     .then(() => {
-                        playPauseBtn.textContent = '⏸';
+                        playPauseBtn.textContent = '⏸'; // Icon Pause
+                        playPauseBtn.style.background = 'var(--accent-hover)';
                     })
                     .catch(e => {
-                        console.log("Bị chặn:", e.message);
-                        showPopup();
+                        console.log("Lỗi phát nhạc:", e);
+                        alert("Vui lòng tương tác với trang để bật nhạc!");
                     });
             }
             isPlaying = !isPlaying;
@@ -682,100 +653,18 @@
 
         function setVolume(val) {
             bgMusic.volume = val;
-            if (val > 0 && !isPlaying && userInteracted) {
-                bgMusic.play()
-                    .then(() => {
-                        isPlaying = true;
-                        playPauseBtn.textContent = '⏸';
-                        hidePopup();
-                    })
-                    .catch(() => showPopup());
-            }
-        }
-
-        function hidePopup() {
-            if (musicPopup) musicPopup.classList.add('hidden');
-        }
-
-        function showPopup() {
-            if (musicPopup) musicPopup.classList.remove('hidden');
-        }
-
-        // 🎯 Khi người dùng click vào popup → phát nhạc có tiếng
-        function enableMusicFromPopup() {
-            userInteracted = true;
-            bgMusic.volume = 0.5;
-            bgMusic.play()
-                .then(() => {
-                    isPlaying = true;
-                    playPauseBtn.textContent = '⏸';
-                    hidePopup();
-                })
-                .catch(e => {
-                    console.log("Không phát được:", e.message);
-                });
         }
 
         /* ========================================
            🚀 KHỞI ĐỘNG
            ======================================== */
-        function tryAutoplay() {
-            // Thử phát im lặng trước (thường được cho phép)
-            bgMusic.volume = 0;
-            const promise = bgMusic.play();
-            if (promise !== undefined) {
-                promise.then(() => {
-                    // Phát được nhưng im → bật popup hỏi người dùng
-                    isPlaying = true;
-                    showPopup();
-                }).catch(() => {
-                    // Trình duyệt chặn hoàn toàn → hiện popup
-                    showPopup();
-                });
-            }
-        }
-
-        // 🎯 Lắng nghe tương tác đầu tiên của người dùng để tự động bật nhạc
-        function setupFirstInteraction() {
-            const events = ['click', 'touchstart', 'keydown', 'scroll'];
-            const handler = function() {
-                if (!userInteracted) {
-                    userInteracted = true;
-                    // Cố gắng phát nhạc có tiếng sau tương tác
-                    bgMusic.volume = 0.5;
-                    bgMusic.play()
-                        .then(() => {
-                            isPlaying = true;
-                            playPauseBtn.textContent = '⏸';
-                            hidePopup();
-                        })
-                        .catch(() => {
-                            // Nếu vẫn không được, thử phát im trước rồi popup
-                            bgMusic.volume = 0;
-                            bgMusic.play()
-                                .then(() => {
-                                    isPlaying = true;
-                                    showPopup();
-                                })
-                                .catch(() => {});
-                        });
-                }
-                events.forEach(evt => document.removeEventListener(evt, handler));
-            };
-            events.forEach(evt => document.addEventListener(evt, handler, { once: true }));
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
             renderGenreFilters();
             renderContents();
             
-            // Thiết lập âm lượng ban đầu
-            bgMusic.volume = 0.5;
-            
-            // Khởi động hệ thống phát nhạc
-            tryAutoplay();
-            setupFirstInteraction();
+            // KHÔNG gọi tryAutoplay nữa. Nhạc sẽ im lặng chờ user bấm nút.
+            console.log("Hệ thống đã sẵn sàng. User cần bấm nút Play để nghe nhạc.");
         });
     </script>
 </body>
